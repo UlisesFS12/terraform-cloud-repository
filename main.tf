@@ -7,5 +7,11 @@ terraform{
     }
 }
 
-resource "random_pet" "vpc" {}
-resource "random_pet" "s3" {}
+resource "aws_s3_bucket" "main"{
+    bucket_prefix = "migrate-me"
+}
+
+module "vpc-acg" {
+  source  = "app.terraform.io/terraform-cloud-orgaa/vpc-acg/aws"
+  version = "1.0.0"
+}
